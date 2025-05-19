@@ -9,7 +9,7 @@ class Worm {
     this.horizontalSpeed = this.baseSpeed;
     this.hXpos = random(width);
     this.dir = -1;
-
+    this.timer = new Timer(5000);
     // Initialize head
     this.head = new HeadSegment(null, this.hXpos, 100);
 
@@ -27,9 +27,24 @@ class Worm {
       currentSeg.pos.x + this.segmentWidth,
       currentSeg.pos.y
     );
+    this.timer.start();
   }
-
+  getLength(){
+    let count = 0;
+    let s = this.head
+    while (s != null){
+      count ++;
+      s = s.next
+    }
+    return count;
+  }
   move() {
+    //On timer out grows the worm
+    if(this.timer.isTimedOut() && this.getLength()< 30){
+      this.grow();
+      this.timer.reset();
+    }
+    
     //outward pos
     this.x = this.head.pos.x;
     this.y = this.head.pos.y;
@@ -61,6 +76,13 @@ class Worm {
     h.angle = dir.heading();
   }
 
+  //Grows the creature by one segment
+  grow(){
+    let s = this.head.next;
+    this.head.next = new BodySegment(s,
+      this.head.pos.x + this.segmentWidth,
+      this.head.pos.y)
+  }
   updateBodySegments(seg) {
     //Reccursivly updates the positions of body segments
     if (!seg.next) {
@@ -154,5 +176,34 @@ class TailSegment extends Segment {
     super(x, y);
     this.next = null;
     this.sprite = loadImage("assets/wormTail.png");
+  }
+}
+
+class Timer {
+  constructor(endTime) {
+    this.startTime = 0;
+    this.running = false;
+    this.endTime = endTime;
+  }
+
+  //Start timer
+  start() {
+    if (!this.running) {
+      this.startTime = millis();
+      this.running = true;
+      this.endTime = this.endTime + this.startTime
+    }
+  }
+  //On reset
+  reset() {
+    this.startTime = millis();
+    this.endTime = this.endTime + this.startTime
+  }
+  //Checks on time out
+  isTimedOut() {
+    if(millis() > this.endTime){
+      return true
+    }
+    return false
   }
 }
