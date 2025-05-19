@@ -14,6 +14,9 @@ function setup() {
   for(let i = 0; i < numCr; i++){
     creatures.push(new MushroomAni());
   }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new Mouse2());
+  }
   
   
   for(let i = 0; i < numCr; i++){
