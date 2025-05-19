@@ -8,7 +8,7 @@ class Mouse2 {
       this.size = 40;
       this.jumpHeight = 0;
       this.isJumping = false;
-      this.noiseOffset = 0;
+      this.noiseOffset = random(10000);
       this.jumpSpeed = 0;
       this.gravity = 0.6;
     }
