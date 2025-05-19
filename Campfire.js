@@ -15,6 +15,7 @@ class Campfire{
   //This is the show method that I used.
   show(){
     push();
+    angleMode(RADIANS)
     translate(this.x, this.y);
     shearX(this.sd-PI/8);
     image(this.img, 0-this.sr, 0);
