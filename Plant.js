@@ -4,7 +4,7 @@ class Plant {
     this.y = random(0, height);
     this.xoff = random(1000);
 
-    this.level = 0.005;
+    this.level = 0.003;
     this.wobble1 = -1;
     this.wobble2 = 1;
     this.time = 3;
@@ -24,8 +24,8 @@ class Plant {
   }
   collision() {
     let d = dist(mouseX, mouseY, this.x, this.y);
-    if (d < 80) {
-      this.level = 0.009;
+    if (d < 40) {
+      this.level = 0.007;
       this.wobble1 = -5;
       this.wobble2 = 5;
       this.time -= 1 / frameRate();
@@ -33,7 +33,7 @@ class Plant {
   }
   reset() {
     if (this.time > 1) {
-      this.level = 0.005;
+      this.level = 0.003;
       this.wobble1 = -1;
       this.wobble2 = 1;
       this.time = 3;
