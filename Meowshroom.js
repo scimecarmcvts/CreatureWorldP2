@@ -20,7 +20,7 @@ class Meowshroom {
     this.oldY = 0;
   }
   tailWag() {
-    let chance = random(5);
+    let chance = random(3);
     if (chance < 2 && !this.wagging && !this.walking && frameCount%5==0) {
       if (this.curFrame < 2) {
         this.curFrame++;
