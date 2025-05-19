@@ -11,6 +11,15 @@ function setup() {
   for(let i = 0; i < 50; i++){
     creatures.push(new Tree());
   }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new MushroomAni());
+  }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new Mouse2());
+  }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new Creeper());
+  }
   
   for(let i = 0; i < numCr; i++){
     creatures.push(new Creature());
@@ -27,6 +36,9 @@ function setup() {
   
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mushroom());
+  }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new PumpkinShroom());
   }
   for(let i = 0; i < numCr; i++){
     creatures.push(new Cow());
