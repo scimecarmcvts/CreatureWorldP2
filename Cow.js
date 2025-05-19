@@ -8,7 +8,7 @@ class Cow {
     this.imgMirror = loadImage("./assets/mooshroom.png");
     this.left = random(0, -100);
     this.right = random(0, 100);
-    this.time = 0;
+    this.time = random(0,75);
     this.timeInc = 0.01;
     this.s = millis() / 1000;
   }

@@ -8,7 +8,7 @@ class Mouse2 {
       this.size = 40;
       this.jumpHeight = 0;
       this.isJumping = false;
-      this.noiseOffset = 0;
+      this.noiseOffset = random(10000);
       this.jumpSpeed = 0;
       this.gravity = 0.6;
     }
@@ -41,7 +41,7 @@ class Mouse2 {
       //ellipse(this.x, this.y, this.size, this.size); // Body
     //   fill(255);
       image(this.sure, this.x, this.y, this.size+20, this.size+20);
-      console.log("x: " + this.x + " y: " + this.y);
+    //   console.log("x: " + this.x + " y: " + this.y);
     
     }
     
