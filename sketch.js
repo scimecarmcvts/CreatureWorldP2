@@ -11,6 +11,10 @@ function setup() {
   for(let i = 0; i < 50; i++){
     creatures.push(new Tree());
   }
+  for(let i = 0; i < numCr; i++){
+    creatures.push(new MushroomAni());
+  }
+  
   
   for(let i = 0; i < numCr; i++){
     creatures.push(new Creature());
