@@ -41,7 +41,7 @@ class Mouse2 {
       //ellipse(this.x, this.y, this.size, this.size); // Body
     //   fill(255);
       image(this.sure, this.x, this.y, this.size+20, this.size+20);
-      console.log("x: " + this.x + " y: " + this.y);
+    //   console.log("x: " + this.x + " y: " + this.y);
     
     }
     
