@@ -6,6 +6,7 @@ function setup() {
   createCanvas(2400, 1350);
   // createCanvas(600, 400);
   
+  console.log("Hello Class!");
     
   for(let i = 0; i < 50; i++){
     creatures.push(new Tree());
