@@ -29,6 +29,9 @@ function setup() {
     creatures.push(new Mushroom());
   }
   for(let i = 0; i < numCr; i++){
+    creatures.push(new PumpkinShroom());
+  }
+  for(let i = 0; i < numCr; i++){
     creatures.push(new Cow());
   }
   for(let i = 0; i < numCr; i++){
