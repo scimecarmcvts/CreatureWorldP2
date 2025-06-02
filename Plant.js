@@ -1,7 +1,8 @@
 class Plant {
   constructor() {
-    this.x = random(0, width);
-    this.y = random(0, height);
+    this.position = createVector(random(0, width),  this.y = random(0, height))
+    this.velocity = createVector(random(1,3),random(1,3));
+    this.acceleration = createVector(noise(this.xoff + 100) * width,noise(this.xoff) * height )
     this.xoff = random(1000);
 
     this.level = 0.003;
@@ -11,16 +12,15 @@ class Plant {
     this.plant = loadImage("./assets/plant.png");
   }
   show() {
-    image(this.plant, this.x, this.y, 40, 40);
+    image(this.plant, this.position.x, this.position.y, 40, 40);
     this.collision();
     this.reset();
   }
 
   move() {
-    this.y = noise(this.xoff) * height;
-    this.x = noise(this.xoff + 100) * width;
+    this.position.add(this.velocity)
     this.xoff += this.level;
-    this.x -= random(this.wobble1, this.wobble2);
+    this.velocity.add(this.acceleration)
   }
   collision() {
     let d = dist(mouseX, mouseY, this.x, this.y);
@@ -30,6 +30,15 @@ class Plant {
       this.wobble2 = 5;
       this.time -= 1 / frameRate();
     }
+    if (this.position.y > height || this.position.y < 0) {
+      this.velocity.y *= -1;
+      this.acceleration.y *= -1;
+    }
+    if (this.position.x > width || this.position.x < 0) {
+      this.velocity.x *= -1;
+      this.acceleration.x *= -1;
+    }
+
   }
   reset() {
     if (this.time > 1) {
