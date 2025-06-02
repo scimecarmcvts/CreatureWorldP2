@@ -6,11 +6,28 @@ function setup() {
   createCanvas(2400, 1350);
   // createCanvas(600, 400);
   
-  console.log("Hello Class!");
-    
-  for(let i = 0; i < 50; i++){
-    creatures.push(new Tree());
+  // console.log("Hello Class!");
+  let treeCount = 50;
+
+  let startY = height/1.7;
+  let endY = height - 100;
+  let yInc = (startY - endY) / treeCount;
+
+  
+  let size = 3;
+  let sizeMin = 0.5;
+  let sizeInc = ( size - sizeMin ) / treeCount;
+
+
+  for(let i = 0; i < treeCount; i++){
+    creatures.push(new Tree(size, startY));
+    startY += yInc;
+
+    size -= sizeInc;
+    console.log(size);
   }
+
+
   for(let i = 0; i < numCr; i++){
     creatures.push(new MushroomAni());
   }
