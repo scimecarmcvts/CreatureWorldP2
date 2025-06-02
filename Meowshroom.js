@@ -74,7 +74,6 @@ class Meowshroom {
       }
     }
   }
-  //I'll add a cool tp animation later
   walk() {
     this.posX = random(0 + 48, width - 48);
     this.posY = random(height - 32, height/2);
