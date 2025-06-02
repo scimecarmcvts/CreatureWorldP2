@@ -8,9 +8,8 @@ class Worm {
     this.off = random(1000);
     this.horizontalSpeed = this.baseSpeed;
     this.hXpos = random(width);
-    this.vel = createVector(0, 0)
-    this.dir = -1;
-    this.dirY = 1;
+    this.acc = createVector(0, noise(this.off))
+    this.vel = createVector(5, 5)
 
     this.timer = new Timer(5000);
 
@@ -44,6 +43,7 @@ class Worm {
     return count;
   }
   move() {
+    this.acc = createVector(0, noise(this.off))
     //On timer out grows the worm
     if(this.timer.isTimedOut() && this.getLength()< 30){
       this.grow();
@@ -60,17 +60,18 @@ class Worm {
 
     //Moves and turns head
     h.last = h.pos.copy();
-    this.vel = createVector(5 * this.dir, noise(this.off)*200 * this.dirY)
+    this.vel.add(this.acc)
+
     h.pos.add(this.vel)
     this.updateBodySegments(h);
 
 
     if (h.pos.x > width || h.pos.x < 0) {
-      this.dir *= -1;
+      this.vel.x *= -1;
     }
     
     if (h.pos.y > height || h.pos.y < 0) {
-      this.dirY *= -1;
+      this.vel.y *= -1;
     }
 
     //Optional creature collision
