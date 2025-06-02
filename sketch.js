@@ -209,8 +209,9 @@ class World {
 
 class Creature {
   constructor() {
-    this.x = random(0, width);
-    this.y = random(height/2, height);
+    this.position = createVector(random(0, width), random(height/2, height) );
+    this.velocity = createVector(0,0);
+    this.acceleration = createVector(0, 0);
     this.display = true;
     this.size = 1;
     this.img = loadImage("sprite1.png");
@@ -218,16 +219,27 @@ class Creature {
     this.noiseSpeed = 0.02;
   }
   show() {
-    image(this.img, this.x, this.y);
+    image(this.img, this.position.x, this.position.y);
   }
   move() {
     let choice = noise(this.nt);
     if (choice < 0.5){
-      this.x++;
+      this.acceleration.x = 0.1;
     } else{
-      this.x--;
+      this.acceleration.x = -0.1;
     }
     this.nt += this.noiseSpeed;
+
+    this.velocity.add(this.acceleration);
+    this.velocity.limit(4);
+    this.position.add(this.velocity);
+
+    if (this.position.x < 0){
+      this.position.x = width;
+    }
+    if (this.position.x > width){
+      this.position.x = 0;
+    }
   }
   
   

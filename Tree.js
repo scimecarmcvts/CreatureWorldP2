@@ -5,6 +5,7 @@ class Tree{
     this.sr = 0;
     this.x = random(width);
     this.y = y;
+    this.position = createVector(this.x,this.y)
     this.img = loadImage("assets/Tree.png");
     this.speed;
     this.size = size;
