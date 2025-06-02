@@ -8,10 +8,14 @@ class Worm {
     this.off = random(1000);
     this.horizontalSpeed = this.baseSpeed;
     this.hXpos = random(width);
-    this.dir = -1;
+    this.acc = createVector(0, noise(this.off))
+    this.vel = createVector(5, 5)
+
     this.timer = new Timer(5000);
+
     // Initialize head
     this.head = new HeadSegment(null, this.hXpos, 100);
+    this.position = this.head.pos.copy;
 
     // Create body worm
     let currentSeg = this.head;
@@ -39,32 +43,35 @@ class Worm {
     return count;
   }
   move() {
+    this.acc = createVector(0, noise(this.off))
     //On timer out grows the worm
     if(this.timer.isTimedOut() && this.getLength()< 30){
       this.grow();
       this.timer.reset();
     }
-    
-    //outward pos
-    this.x = this.head.pos.x;
-    this.y = this.head.pos.y;
+
+    this.position = this.head.pos.copy;
 
     //Noise offset
-    this.off += 0.01;
+    this.off += 0.1;
 
     //Sets var for head for quick access
     let h = this.head;
 
     //Moves and turns head
     h.last = h.pos.copy();
+    this.vel.add(this.acc)
+
+    h.pos.add(this.vel)
     this.updateBodySegments(h);
-    let y = constrain((noise(this.off) * height) / 0.75, height / 4, height);
-    h.pos = createVector(this.hXpos, y);
 
-    this.hXpos -= 5 * this.dir;
 
-    if (this.hXpos > width || this.hXpos < 0) {
-      this.dir *= -1;
+    if (h.pos.x > width || h.pos.x < 0) {
+      this.vel.x *= -1;
+    }
+    
+    if (h.pos.y > height || h.pos.y < 0) {
+      this.vel.y *= -1;
     }
 
     //Optional creature collision
@@ -98,11 +105,21 @@ class Worm {
   }
 
   detectCollision(C) {
+    if(!C.position){
+      return false;
+    }
+    console.log( (
+      this.position.x < C.position.x + C.width &&
+      this.position.x + this.width > C.position.x &&
+      this.position.y < C.position.y + C.height &&
+      this.position.y + this.height > C.position.y
+    ))
+
     return (
-      this.x < C.x + C.width &&
-      this.x + this.width > C.x &&
-      this.y < C.y + C.height &&
-      this.y + this.height > C.y
+      this.position.x < C.position.x + C.width &&
+      this.position.x + this.width > C.position.x &&
+      this.position.y < C.position.y + C.height &&
+      this.position.y + this.height > C.position.y
     );
   }
   show() {
