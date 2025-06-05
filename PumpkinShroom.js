@@ -7,7 +7,9 @@ class PumpkinShroom {
     this.pumpkinImg = loadImage('assets/pumpkinShroom.png');
     this.noiseScale = 0.005;
 
-    this.pos = createVector(0, random(350, 1350));
+
+    let startX = random(width);
+    this.pos = createVector(startX, random(350, 1350));
     this.prevPos = this.pos.copy();
     this.timer = 0;
     this.imgWidth = 120;
