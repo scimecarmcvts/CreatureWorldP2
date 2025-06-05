@@ -1,3 +1,8 @@
+/*
+Sai Anirvinya Kolli 
+6/5/2025
+Extra: Worm growth
+*/
 class Worm {
   constructor() {
     // Initialize vars
@@ -8,10 +13,11 @@ class Worm {
     this.off = random(1000);
     this.horizontalSpeed = this.baseSpeed;
     this.hXpos = random(width);
-    this.acc = createVector(0, noise(this.off))
-    this.vel = createVector(5, 5)
-
+    this.acc = createVector(noise(this.off+100)*10, noise(this.off)*10)
+    this.vel = createVector(10, 5)
     this.timer = new Timer(5000);
+    this.turnedX = false;
+    this.turnedY = false;
 
     // Initialize head
     this.head = new HeadSegment(null, this.hXpos, 100);
@@ -32,6 +38,7 @@ class Worm {
       currentSeg.pos.y
     );
     this.timer.start();
+    
   }
   getLength(){
     let count = 0;
@@ -43,7 +50,6 @@ class Worm {
     return count;
   }
   move() {
-    this.acc = createVector(0, noise(this.off))
     //On timer out grows the worm
     if(this.timer.isTimedOut() && this.getLength()< 30){
       this.grow();
@@ -53,7 +59,7 @@ class Worm {
     this.position = this.head.pos.copy;
 
     //Noise offset
-    this.off += 0.1;
+    this.off += 1;
 
     //Sets var for head for quick access
     let h = this.head;
@@ -61,17 +67,32 @@ class Worm {
     //Moves and turns head
     h.last = h.pos.copy();
     this.vel.add(this.acc)
-
+    this.vel.limit(15)
     h.pos.add(this.vel)
     this.updateBodySegments(h);
 
 
-    if (h.pos.x > width || h.pos.x < 0) {
-      this.vel.x *= -1;
+    if ((h.pos.x > width || h.pos.x < 0) && !this.turnedX) {
+      this.vel.x *= -0.5;
+      this.acc.x *= -1;
+      this.turnedX = true
     }
     
-    if (h.pos.y > height || h.pos.y < 0) {
-      this.vel.y *= -1;
+    if ((h.pos.y > height || h.pos.y < 0) && !this.turnedY) {
+      this.vel.y *= -0.5;
+      this.acc.y *= -1;
+      this.turnedY = true
+    }
+
+    if (this.turnedX){
+      if (h.pos.x < width && h.pos.x > 0){
+        this.turnedX = false
+      }
+    }
+    if (this.turnedY){
+      if (h.pos.y < this.height && h.pos.y > 0){
+        this.turnedY = false
+      }
     }
 
     //Optional creature collision
@@ -108,12 +129,6 @@ class Worm {
     if(!C.position){
       return false;
     }
-    console.log( (
-      this.position.x < C.position.x + C.width &&
-      this.position.x + this.width > C.position.x &&
-      this.position.y < C.position.y + C.height &&
-      this.position.y + this.height > C.position.y
-    ))
 
     return (
       this.position.x < C.position.x + C.width &&
