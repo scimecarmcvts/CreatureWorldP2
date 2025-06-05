@@ -2,7 +2,12 @@ let creatures = [];
 let numCr = 5;
 let w;
 
+
+
 function setup() {
+
+
+
   createCanvas(2400, 1350);
   // createCanvas(600, 400);
   
@@ -18,10 +23,10 @@ function setup() {
   // let sizeInc = ( size - sizeMin ) / treeCount;
 
 for (let j = 0; j < 5; j++){
-  for(let i = 0; i < width; i += 70 + j * 10){
-    creatures.push(new Tree(1 + j * 0.2, 
-      i + random(-4 * j, 4 * j) + j * 10, 
-      startY + random(2 * j, 20 * j) + j * 120));
+  for(let i = 0; i < width; i += 70 + j * 20){
+    creatures.push(new Tree(1 + j * 0.6, 
+      i + random(-8 * (j + 1), 8 * (j+ 1)) + j * 40, 
+      startY + random(2 * j, 20 * j) + j * 100));
   }
 }
 
@@ -45,6 +50,8 @@ for (let j = 0; j < 5; j++){
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mouse(random(width), random(height/4, height)));
   }
+  
+  creatures.push(new Cat());
   
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mushroom());
@@ -80,7 +87,7 @@ for (let j = 0; j < 5; j++){
     creatures.push(new Campfire());
   }
   
-  creatures.push(new Cat());
+  
   
   w = new World();
 }

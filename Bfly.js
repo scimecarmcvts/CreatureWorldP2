@@ -28,7 +28,7 @@ move() {
   if (!this.dragging) {
     // force noiseX to be able to 
       //t noiseForceX = map(noise(this.noiseStart 
-      this.acceleration.x = noiseForceX;
+      this.acceleration.x = this.noiseForceX;
       this.noiseStart += this.noiseInc;
   }
 
