@@ -20,7 +20,7 @@ class Cow {
     this.timeInc = 0.01;
     this.s = millis() / 1000;
   }
-  update() {
+  move() {
     this.vel.add(this.acc);
     this.vel.limit(1);
     this.pos.add(this.vel);
