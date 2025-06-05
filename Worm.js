@@ -13,8 +13,8 @@ class Worm {
     this.off = random(1000);
     this.horizontalSpeed = this.baseSpeed;
     this.hXpos = random(width);
-    this.acc = createVector(noise(this.off+100)*10, noise(this.off)*10)
-    this.vel = createVector(10, 5)
+    this.acc = createVector(noise(this.off+100)*10, noise(this.off)*20)
+    this.vel = createVector(5, 10)
     this.timer = new Timer(5000);
     this.turnedX = false;
     this.turnedY = false;
