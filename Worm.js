@@ -67,7 +67,7 @@ class Worm {
     //Moves and turns head
     h.last = h.pos.copy();
     this.vel.add(this.acc)
-    this.vel.limit(15)
+    this.vel.limit(noise(this.off)*50)
     h.pos.add(this.vel)
     this.updateBodySegments(h);
 
