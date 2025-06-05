@@ -1,3 +1,8 @@
+
+//Rian Nadella
+//2A Into to Java
+//6/5/2025
+//
 class Plant {
   constructor() {
     this.position = createVector(random(0, width),  this.y = random(0, height))
@@ -6,13 +11,14 @@ class Plant {
     this.xoff = random(1000);
 
     this.level = 0.003;
-    this.wobble1 = -1;
-    this.wobble2 = 1;
+    this.wobble1 = -5;
+    this.wobble2 = 5;
     this.time = 3;
     this.plant = loadImage("./assets/plant.png");
+    this.size = 40;
   }
   show() {
-    image(this.plant, this.position.x, this.position.y, 40, 40);
+    image(this.plant, this.position.x, this.position.y, this.size,this.size);
     this.collision();
     this.reset();
   }
@@ -23,7 +29,7 @@ class Plant {
     this.velocity.add(this.acceleration)
   }
   collision() {
-    let d = dist(mouseX, mouseY, this.x, this.y);
+    let d = dist(mouseX, mouseY, this.position.x, this.position.y);
     if (d < 40) {
       this.level = 0.007;
       this.wobble1 = -5;
@@ -38,6 +44,14 @@ class Plant {
       this.velocity.x *= -1;
       this.acceleration.x *= -1;
     }
+  if (d < this.size) {
+  this.size += 1;
+}
+  if (this.size > 80){
+    if (d < this.size) {
+  this.size -= 1;
+}
+  }
 
   }
   reset() {
