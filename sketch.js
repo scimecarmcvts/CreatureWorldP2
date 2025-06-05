@@ -49,8 +49,6 @@ function setup() {
     creatures.push(new Mouse(random(width), random(height/4, height)));
   }
   
-  creatures.push(new Cat());
-  
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mushroom());
   }
@@ -85,7 +83,7 @@ function setup() {
     creatures.push(new Campfire());
   }
   
-  
+  creatures.push(new Cat());
   
   w = new World();
 }
