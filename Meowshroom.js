@@ -7,8 +7,7 @@ class Meowshroom {
     this.frame4 = loadImage('./assets/frame4.png');
     this.directions = createVector(-1, 1);
     this.curFrame = 0;
-    this.posX = random(0, width);
-    this.posY = random(height, height/2);
+    this.position = createVector(random(0, width), random(height, height/2));
     this.wagging = false;
     this.initFrame = 0;
     this.walking = false;
@@ -38,11 +37,11 @@ class Meowshroom {
   velMove() {
     this.velocity.limit(this.velLimit);
     this.velocity.limit(-this.velLimit);
-    if (this.posX > 48 && this.posX < width - 48) {
-      this.posX += this.velocity.x;
+    if (this.position.x > 48 && this.position.x < width - 48) {
+      this.position.x += this.velocity.x;
     }
-    if (this.posY > 300 && this.posY < height - 32) {
-      this.posY += this.velocity.y;
+    if (this.position.y > 300 && this.position.y < height - 32) {
+      this.position.y += this.velocity.y;
     }
     if (this.directions.x == 1) {
       this.velocity.x = random(this.minVel, this.maxVel);
@@ -75,8 +74,8 @@ class Meowshroom {
     }
   }
   walk() {
-    this.posX = random(0 + 48, width - 48);
-    this.posY = random(height - 32, height/2);
+    this.position.x = random(0 + 48, width - 48);
+    this.position.y = random(height - 32, height/2);
     this.walking = false;
   }
   show() {
@@ -87,10 +86,10 @@ class Meowshroom {
       push();
       translate(width, 0);
       scale(-1, 1);
-      image(frameArray[this.curFrame], width - this.posX, this.posY, 32, 48);
+      image(frameArray[this.curFrame], width - this.position.x, this.position.y, 32, 48);
       pop();
     } else {
-      image(frameArray[this.curFrame], this.posX, this.posY, 32, 48);
+      image(frameArray[this.curFrame], this.position.x, this.position.y, 32, 48);
     }  
     this.tailWag();
   }
