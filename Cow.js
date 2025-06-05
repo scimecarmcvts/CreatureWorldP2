@@ -5,6 +5,10 @@ Creature Lab Vector Update
 Extra: Cow moos
 **/
 
+function preload() {
+
+}
+
 class Cow {
   constructor() {
     //Constructing x,y and other vars like movement
@@ -19,6 +23,8 @@ class Cow {
     this.time = random(0, 75);
     this.timeInc = 0.01;
     this.s = millis() / 1000;
+    this.sound = loadSound('./assets/moo.mp3');
+    this.startTime = millis();
   }
   move() {
     this.vel.add(this.acc);
@@ -29,7 +35,7 @@ class Cow {
       this.pos.x = 0;
     }
 
-    if (this.pos.y > 1080) {
+    if (this.pos.y > 1350) {
       this.pos.y = random(350, 700);
     }
   }
@@ -44,6 +50,10 @@ class Cow {
       //Show original image if going left
       image(this.img, this.pos.x, this.pos.y, 96, 96);
       this.pos.x--;
+    }
+
+    if (this.s > 4) {
+    this.sound.play();
     }
 
     //Allows the creature to move by incrementing time
