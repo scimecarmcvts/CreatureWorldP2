@@ -7,7 +7,6 @@ class PumpkinShroom {
     this.pumpkinImg = loadImage('assets/pumpkinShroom.png');
     this.noiseScale = 0.005;
 
-
     let startX = random(width);
     this.pos = createVector(startX, random(350, 1350));
     this.prevPos = this.pos.copy();
@@ -20,22 +19,35 @@ class PumpkinShroom {
   move() {
     let t = frameCount * this.noiseScale;
     this.prevPos = this.pos.copy();
-    this.pos.x = width * noise(t);
+
+
+    this.pos.x += map(noise(t), 0, 1, -15, 15);
+    this.pos.x = constrain(this.pos.x, 0, width);
 
     if (millis() - this.timer > 500) {
       let flipped = this.pos.x > this.prevPos.x;
       let offset = flipped ? -50 : 50;
       let pumpkinPos = createVector(this.pos.x + offset, this.pos.y);
-      let pumpkinVel = createVector(random(-1, 1), 0);
 
-      this.pumpkins.push({ pos: pumpkinPos, vel: pumpkinVel, alpha: 255 });
+
+      let pumpkinVel = createVector(random(-2, 2), random(-1, 1));
+  
+
+      this.pumpkins.push({
+        pos: pumpkinPos,
+        vel: pumpkinVel,
+        alpha: 255,
+
+      });
+
       this.timer = millis();
     }
 
     for (let i = this.pumpkins.length - 1; i >= 0; i--) {
       let p = this.pumpkins[i];
       p.pos.add(p.vel);
-      p.alpha -= 5;
+      p.alpha -= 1;
+
       if (p.alpha <= 0) {
         this.pumpkins.splice(i, 1);
       }
