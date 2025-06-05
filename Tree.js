@@ -1,21 +1,21 @@
 class Tree{
-  constructor(size, y){
+  constructor(treeSize, x, y){
     this.dir = 0.3;
     this.sd = PI/2;
     this.sr = 0;
-    this.x = random(width);
+    this.x = x;
     this.y = y;
     this.position = createVector(this.x,this.y)
     this.img = loadImage("assets/Tree.png");
     this.speed;
-    this.size = size;
+    this.treeSize = treeSize;
   }
   show(){
     push();
     angleMode(RADIANS);
     translate(this.x,this.y);
     shearX(this.sd-PI/8);
-    image(this.img, 0-this.sr, 0, 64 * this.size, 64 * this.size);
+    image(this.img, 0-this.sr, 0, 64 * this.treeSize, 64 * this.treeSize);
     pop();
    
   }
