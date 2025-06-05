@@ -7,26 +7,23 @@ function setup() {
   // createCanvas(600, 400);
   
   // console.log("Hello Class!");
-  let treeCount = 50;
 
-  let startY = height/1.7;
+  let startY = height/4 + 20;
   let endY = height - 100;
-  let yInc = (startY - endY) / treeCount;
+  // let yInc = (startY - endY) / treeCount;
 
   
-  let size = 3;
+  let sizeT = 3;
   let sizeMin = 0.5;
-  let sizeInc = ( size - sizeMin ) / treeCount;
+  // let sizeInc = ( size - sizeMin ) / treeCount;
 
-
-  for(let i = 0; i < treeCount; i++){
-    creatures.push(new Tree(size, startY));
-    startY += yInc;
-
-    size -= sizeInc;
-    console.log(size);
+for (let j = 0; j < 5; j++){
+  for(let i = 0; i < width; i += 70 + j * 10){
+    creatures.push(new Tree(1 + j * 0.2, 
+      i + random(-4 * j, 4 * j) + j * 10, 
+      startY + random(2 * j, 20 * j) + j * 120));
   }
-
+}
 
   for(let i = 0; i < numCr; i++){
     creatures.push(new MushroomAni());
@@ -48,8 +45,6 @@ function setup() {
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mouse(random(width), random(height/4, height)));
   }
-  
-  creatures.push(new Cat());
   
   for(let i = 0; i < numCr; i++){
     creatures.push(new Mushroom());
@@ -85,7 +80,7 @@ function setup() {
     creatures.push(new Campfire());
   }
   
-  
+  creatures.push(new Cat());
   
   w = new World();
 }
@@ -108,9 +103,7 @@ class World {
     this.nt = 0;
     this.ntWaves = 100;
     this.noiseSpeed = 0.002;
-    
-    this.treeNoise = 1000;
-    this.treeNoiseSpeed = 0.02;
+
     
   }
 
@@ -160,8 +153,6 @@ class World {
       currentNt += 1000;
     }
     
-    
-    //this.drawTrees();
 
     this.drawText();
   }
@@ -173,38 +164,7 @@ class World {
     text("Haunted Mooshroom Forest", 50, 50);
   }
   
-  drawTrees(){
-    //walker 
-    randomSeed(101);
-    this.treeNoise = 1000;
-    
-    let x = random(width);
-    let y = random(height/3, height/2);
-    let speed = 5;
-    
-    for (let i = 0; i < 5000; i++){
-      let lightVal = noise(this.treeNoise);
-      stroke(45 * lightVal, 100 * lightVal, 45 * lightVal);
-      strokeWeight(random(2,12));
-      point(x, y);
-      let choice = random();
-      if (choice < 0.2){
-        y-= speed;
-      } else if (choice < 0.4){
-        y+= speed;
-      } else if (choice < 0.6){
-        x-= speed;
-      } else{
-        x+= speed;
-      }
-      
-      if (x > width){
-        x = 0;
-      }
-      this.treeNoise += this.treeNoiseSpeed;
-    }
-    
-  }
+  
 }
 
 class Creature {
@@ -213,7 +173,7 @@ class Creature {
     this.velocity = createVector(0,0);
     this.acceleration = createVector(0, 0);
     this.display = true;
-    this.size = 1;
+    this.sizeC = 1;
     this.img = loadImage("sprite1.png");
     this.nt = random(1000);
     this.noiseSpeed = 0.02;
