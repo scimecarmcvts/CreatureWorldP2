@@ -14,7 +14,8 @@ class Campfire{
     this.speed = 1;
     this.noiseStart = random(1000);
     this.noiseInc = 0.06;
-    this.xoff = random(1000);
+    this.velocity = createVector(2, 3);
+    this.acceleration = createVector(0.5, 0.5);
     
   }
   
@@ -26,19 +27,21 @@ class Campfire{
     shearX(this.sd-PI/8);
     image(this.img, 0-this.sr, 0);
     pop();
-    //this.velocity.limit(10);
-    //this.velocity.add(this.acceleration);
+    
   }
   
   //This is the move method that I used.
     move(){
 
-      this.velocity = createVector(2, 3);
-    this.acceleration = createVector(0.5, 0.5);
       //This is how I used noise function in my program. 
-      this.xoff += 0.05;
       this.speed = noise(this.noiseStart) * 2;
       this.noiseStart += this.noiseInc;
+
+      //this.acceleration.x += this.speed;
+
+      //this.velocity.limit(10);
+    //this.velocity.add(this.acceleration);
+    //this.position.add(this.velocity);
       
       if(this.sr > -20 && this.sr <= 20){
 
