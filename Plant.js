@@ -43,13 +43,11 @@ class Plant {
       this.acceleration.x *= -1;
     }
     //This is collsion
-  if (d < this.size) {
+  if (d < this.size && (this.size < 80)) {
   this.size += 1;
 }
-  if (this.size > 80){
-    if (d < this.size) {
-  this.size -= 1;
-}
+  else if(this.size > 40){
+    this.size -=1;
   }
 
   }
