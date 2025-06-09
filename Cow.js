@@ -6,7 +6,7 @@ Extra: Cow moos
 **/
 
 function preload() {
-
+cowSound = loadSound('./assets/moo.mp3');
 }
 
 class Cow {
@@ -22,15 +22,17 @@ class Cow {
     this.right = random(0, 100);
     this.time = random(0, 75);
     this.timeInc = 0.01;
-    this.s = millis() / 1000;
-    this.sound = loadSound('./assets/moo.mp3');
+    this.sound = sound;
     this.startTime = millis();
+    this.lastMoo = 0;
   }
   move() {
+    //Movement control
     this.vel.add(this.acc);
     this.vel.limit(1);
     this.pos.add(this.vel);
 
+    //Both of these conditionals will respawn the cow if they go off screen
     if (this.pos.x > 2400) {
       this.pos.x = 0;
     }
@@ -52,7 +54,8 @@ class Cow {
       this.pos.x--;
     }
 
-    if (this.s > 4) {
+    //Plays sound every 5 second
+    if (millis() - this.lastMoo > 5000) {
     this.sound.play();
     }
 
