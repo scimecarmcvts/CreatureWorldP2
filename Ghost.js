@@ -1,3 +1,14 @@
+
+// Name: Pruthvi Nagalla
+// Date: 6/9/25
+// Extra: When clikced on the sprite it increases in size
+
+
+
+
+
+
+
 class Ghost {
 constructor(){ 
 
