@@ -218,12 +218,13 @@ function keyPressed(){
 }
 
 function mousePressed() {
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height && keyCode == 65) {
     let fs = fullscreen();
     fullscreen(!fs);
   }
 }
 
 function windowResized(){
-  resizeCanvas(windowWidth, windowHeight);
+    resizeCanvas(windowWidth, windowHeight);
+ 
 }

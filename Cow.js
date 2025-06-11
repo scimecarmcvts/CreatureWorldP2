@@ -22,7 +22,7 @@ class Cow {
     this.right = random(0, 100);
     this.time = random(0, 75);
     this.timeInc = 0.01;
-    this.sound = sound;
+    this.sound = cowSound;
     this.startTime = millis();
     this.lastMoo = 0;
   }

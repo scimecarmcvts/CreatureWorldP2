@@ -46,8 +46,10 @@ this.velocity.limit(5)
 
 if (mouseIsPressed){
 
-this.size += 0.5;
+this.size += 0.3;
 
+} else if (this.size > 1){
+    this.size -= this.size / 15;
 }
 
 }
