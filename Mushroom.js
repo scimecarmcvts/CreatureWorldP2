@@ -18,7 +18,13 @@ class Mushroom {
   }
   
   show() {
+    if (this.flipped) {
+      push();
+      scale(-1, 1);
       image(this.img, this.position.add(this.velocity).x, this.position.add(this.velocity).y, 32, 32);
+      pop();
+    } else{ image(this.img, this.position.add(this.velocity).x, this.position.add(this.velocity).y, 32, 32);
+ }
   }
    move(){
 this.velocity.add(this.acceleration);
@@ -28,6 +34,15 @@ this.position.x += -2*this.dir;
 this.position.y += 0.04;
 this.yoff += 0.04;
 this.velocity.limit(random(0,8));
+    if (this.position.x < -400 ) {
+      this.flipped=true;
+
+    }
+      if (this.position.x < -750 ) {
+        
+      this.flipped=false;
+ this.position.x=width-100;
+    }
     if (this.position.x > width || this.position.x < 0) {
       this.velocity.x *= -1;
       this.acceleration *= -0.1;
