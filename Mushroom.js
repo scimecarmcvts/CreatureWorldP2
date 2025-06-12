@@ -4,6 +4,9 @@ Gabriel Arias
 6/8/25
 Creature Lab
 **/
+function preload() {
+ //sound = loadSound('./assets/buzz.mp3');
+}
 class Mushroom {
 
   constructor() {
@@ -46,3 +49,6 @@ this.velocity.limit(random(0,8));
   }
    } 
  
+function mousePressed(){
+ // sound.play();
+}
