@@ -1,3 +1,14 @@
+
+// Name: Pruthvi Nagalla
+// Date: 6/9/25
+// Extra: When clikced on the sprite it increases in size
+
+
+
+
+
+
+
 class Ghost {
 constructor(){ 
 
@@ -35,8 +46,10 @@ this.velocity.limit(5)
 
 if (mouseIsPressed){
 
-this.size += 0.5;
+this.size += 0.3;
 
+} else if (this.size > 1){
+    this.size -= this.size / 15;
 }
 
 }

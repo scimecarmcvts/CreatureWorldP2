@@ -2,7 +2,7 @@
 //June 1, 2025
 //Introduction to Java Programming
 //Creature Lab - Joseph Sangem
-//Extra:  
+//Extra:  I used the Shear Function to help my campfire's movement.
 
 class Campfire{
   constructor(){
